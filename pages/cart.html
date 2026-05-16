@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart | PakServicesHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal-overlay" id="auth-modal-overlay">
+        <div class="auth-modal-card">
+            <div class="auth-modal-icon">🔐</div>
+            <h3>Login Required</h3>
+            <p>You need to be logged in as a customer to proceed with booking.</p>
+            <div class="auth-modal-btns">
+                <a href="login.html" class="auth-modal-login">👤 Login</a>
+                <a href="signup.html" class="auth-modal-signup">👥 Sign Up</a>
+            </div>
+            <button class="auth-modal-close" onclick="document.getElementById('auth-modal-overlay').classList.remove('open')">✕ Close</button>
+        </div>
+    </div>
+
+    <div id="sd-toast-stack" class="lm-toast-stack"></div>
+
+    <header class="standard-header">
+        <h1>🛒 My Cart</h1>
+        <p>Review your selected services before booking</p>
+    </header>
+
+    <div class="cart-page-container">
+        <div id="cart-items-container"></div>
+        <div class="cart-summary-card" id="cart-summary">
+            <h3>Order Summary</h3>
+            <div class="cart-summary-row">
+                <span>Total Items:</span>
+                <strong id="cart-total-items">0</strong>
+            </div>
+            <div class="cart-summary-row">
+                <span>Estimated Total:</span>
+                <strong id="cart-total-price" class="cart-total-price-val">—</strong>
+            </div>
+            <button class="cart-proceed-btn" onclick="proceedToBook()">✅ Proceed to Book All</button>
+            <button class="cart-clear-btn" onclick="clearCartAction()">🗑️ Clear Cart</button>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/cart-page.js"></script>
+</body>
+</html>

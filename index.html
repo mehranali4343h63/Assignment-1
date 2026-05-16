@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PakServicesHub | Find Trusted Local Services in Pasrur, Sialkot &amp; Narowal</title>
+    <meta name="description" content="Find verified plumbers, electricians, tutors and more across Pasrur, Sialkot and Narowal.">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <!-- ── Hero ── -->
+    <header class="hero-pak">
+        <div class="hero-inner animate-up">
+            <h1>Find Trusted Local Services</h1>
+            <p>Connect with verified professionals in <strong>Pasrur</strong>, <strong>Sialkot</strong> &amp; <strong>Narowal</strong></p>
+
+            <div class="search-box-pak" id="main-search-box">
+                <div class="search-field search-field-main">
+                    <span class="search-field-icon">🔍</span>
+                    <input type="text" id="main-search"
+                        placeholder="Search plumbers, tutors, mechanics…"
+                        autocomplete="off" aria-label="Search services">
+                    <div id="search-results" class="search-results-panel"></div>
+                </div>
+                <div class="search-field city-field">
+                    <span class="search-field-icon">🏙️</span>
+                    <select id="city-select" aria-label="Select city">
+                        <option value="">Select City</option>
+                    </select>
+                </div>
+                <div class="search-field village-search-wrapper" id="village-search-wrapper">
+                    <span class="search-field-icon village-pin-icon">📍</span>
+                    <input type="text" id="village-search"
+                        placeholder="First select a city"
+                        autocomplete="off" disabled aria-label="Search village">
+                    <div id="village-results" class="search-results-panel village-results-panel"></div>
+                </div>
+                <button class="btn-search-pak" id="hero-search-btn" aria-label="Search">🔍</button>
+            </div>
+
+            <div class="popular-chips" id="service-chips-row">
+                <span class="popular-label">Popular:</span>
+                <span class="chip-pak" data-val="Plumber">🔧 Plumber</span>
+                <span class="chip-pak" data-val="Electrician">⚡ Electrician</span>
+                <span class="chip-pak" data-val="Tutor">🎓 Tutor</span>
+                <span class="chip-pak" data-val="Mechanic">🚗 Mechanic</span>
+                <span class="chip-pak" data-val="Cook">🍳 Cook</span>
+                <span class="chip-pak" data-val="Maid">🧹 Maid</span>
+            </div>
+
+            <div class="popular-villages" id="popular-villages-strip">
+                <span class="popular-label">Popular Areas:</span>
+                <div id="popular-chips-row" class="popular-chips-row"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── Browse by Category ── -->
+    <section class="section-category">
+        <div class="sec-title animate-up">
+            <h2>Browse All Services</h2>
+            <p>Choose a category to explore services with images and prices</p>
+        </div>
+
+        <!-- Category buttons — same as header nav -->
+        <div class="home-cat-buttons-wrap">
+            <div class="home-cat-buttons" id="home-cat-buttons"></div>
+        </div>
+
+        <!-- Service cards grid for selected category -->
+        <div class="home-services-grid" id="home-services-grid"></div>
+    </section>
+
+    <!-- ── Most Searched (quick icons) ── -->
+    <section class="section-searched">
+        <div class="sec-title animate-up">
+            <h2>Most Searched Services</h2>
+            <p>Quick access to services our users love</p>
+        </div>
+        <div class="searched-grid" id="services-container"></div>
+    </section>
+
+    <!-- ── Featured Businesses ── -->
+    <section class="section-businesses">
+        <div class="sec-title animate-up">
+            <h2>Featured Businesses</h2>
+            <p>Top-rated service providers in your area</p>
+        </div>
+        <div class="business-grid" id="business-container"></div>
+    </section>
+
+    <!-- ── Testimonials ── -->
+    <section class="section-testimonials">
+        <div class="sec-title animate-up">
+            <h2>What Our Users Say</h2>
+            <div class="sec-underline"></div>
+        </div>
+        <div class="video-grid" id="testimonial-container"></div>
+    </section>
+
+    <!-- ── App Section ── -->
+    <section class="app-section">
+        <div class="animate-up">
+            <span class="app-badge">📱 Now Available on Google Play</span>
+            <h2 class="app-heading">Find Local Services<br>Anytime, Anywhere</h2>
+            <p class="app-desc">Download the PakServicesHub app and connect with verified professionals in your village.</p>
+            <div class="app-play-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" height="35" alt="Google Play">
+            </div>
+            <div class="app-check">
+                <span>✓ Free to Use</span>
+                <span>✓ Verified Providers</span>
+                <span>✓ 24/7 Access</span>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/store.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | PakServicesHub</title>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="login-page-bg">
+
+    <div class="auth-card login-card">
+        <div class="lock-icon">🔐</div>
+
+        <div class="login-mode-toggle">
+            <button id="mode-customer" class="mode-btn mode-btn-active" onclick="setLoginMode('customer')">👤 Customer</button>
+            <button id="mode-admin"    class="mode-btn"                 onclick="setLoginMode('admin')">🔧 Admin</button>
+        </div>
+
+        <h1 class="login-title" id="login-mode-title">Customer Login</h1>
+        <p class="login-subtitle">PakServicesHub — Sign in to your account</p>
+
+        <div class="auth-error" id="login-error"></div>
+
+        <form id="login-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="username" id="username-label">Email / Phone</label>
+                <input type="text" id="username" placeholder="your@email.com" autocomplete="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="pw-wrapper">
+                    <input type="password" id="password" placeholder="••••••••••" autocomplete="current-password" required>
+                    <button type="button" class="pw-toggle" id="pw-toggle-btn" onclick="togglePw()">👁️</button>
+                </div>
+            </div>
+            <button type="submit" class="btn-login-submit" id="submit-btn">
+                <span id="btn-label">Login →</span>
+            </button>
+        </form>
+
+        <div class="hint-box" id="login-hint">
+            <span>ℹ️</span>
+            <div>
+                <strong>Admin credentials</strong><br>
+                Username: <code>admin</code> &nbsp;|&nbsp; Password: <code>psh@admin2024</code>
+            </div>
+        </div>
+
+        <p class="auth-switch-text">
+            No account? <a href="signup.html" class="auth-switch-link">Sign Up Free</a>
+        </p>
+        <a href="../index.html" class="back-link">← Back to website</a>
+    </div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | PakServicesHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar OUTSIDE the flex layout so mega menu works correctly -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Admin layout wrapper -->
+    <div class="admin-layout">
+
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-logo">
+                <div class="logo-text">Pak<span>Services</span>Hub</div>
+                <div class="logo-sub">Admin Control Panel</div>
+            </div>
+
+            <div class="admin-sidebar-item active" id="sb-overview"  onclick="showTab('overview',this)">📊 Overview</div>
+            <div class="admin-sidebar-item"        id="sb-biz"       onclick="showTab('biz',this)">🏢 Businesses</div>
+            <div class="admin-sidebar-item"        id="sb-test"      onclick="showTab('test',this)">🎬 Testimonials</div>
+            <div class="admin-sidebar-item"        id="sb-services"  onclick="showTab('services',this)">🛠️ Services</div>
+            <div class="admin-sidebar-item"        id="sb-location"  onclick="showTab('location',this)">📍 Cities &amp; Villages</div>
+
+            <div class="admin-sidebar-footer">
+                <a href="../index.html" class="admin-sidebar-item admin-sidebar-link">🏠 View Website</a>
+                <div class="admin-sidebar-item sidebar-logout" onclick="handleLogout()">🚪 Logout</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <h1 class="admin-page-title" id="tab-title">Dashboard Overview</h1>
+
+            <!-- Tab: Overview -->
+            <div id="tab-overview" class="db-tab active">
+                <div class="admin-stats-row">
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon">🏢</div>
+                        <div class="admin-stat-num" id="stat-biz">0</div>
+                        <div class="admin-stat-label">Businesses</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon">🎬</div>
+                        <div class="admin-stat-num" id="stat-test">0</div>
+                        <div class="admin-stat-label">Testimonials</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon">🛠️</div>
+                        <div class="admin-stat-num" id="stat-svc">0</div>
+                        <div class="admin-stat-label">Services</div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-icon">🏙️</div>
+                        <div class="admin-stat-num" id="stat-cities">0</div>
+                        <div class="admin-stat-label">Cities</div>
+                    </div>
+                </div>
+                <div class="admin-form-card">
+                    <h3>👋 Welcome to the Admin Panel</h3>
+                    <p class="admin-welcome-text">
+                        Use the sidebar to manage your website content. Add or remove businesses,
+                        video testimonials, manage service images, and control city/village data.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tab: Businesses -->
+            <div id="tab-biz" class="db-tab">
+                <div class="admin-form-card">
+                    <h3>➕ Add New Business</h3>
+                    <div class="admin-form-grid">
+                        <input type="text" id="biz-name"  class="admin-input" placeholder="Business Name">
+                        <input type="text" id="biz-loc"   class="admin-input" placeholder="Location (e.g. Pasrur City)">
+                        <input type="text" id="biz-image" class="admin-input" placeholder="Image URL (optional)">
+                        <input type="text" id="biz-cat"   class="admin-input" placeholder="Category (e.g. Auto Services)">
+                    </div>
+                    <button onclick="handleAddBiz()" class="admin-btn-primary">Add Business</button>
+                </div>
+                <div id="biz-list-admin"></div>
+            </div>
+
+            <!-- Tab: Testimonials -->
+            <div id="tab-test" class="db-tab">
+                <div class="admin-form-card">
+                    <h3>➕ Add Video Testimonial</h3>
+                    <div class="admin-form-grid">
+                        <input type="text" id="test-name" class="admin-input" placeholder="User Name">
+                        <input type="text" id="test-link" class="admin-input" placeholder="YouTube Embed URL">
+                        <input type="text" id="test-biz"  class="admin-input" placeholder="User Location / Business">
+                    </div>
+                    <textarea id="test-text" class="admin-textarea" placeholder="Feedback text…"></textarea>
+                    <button onclick="handleAddTest()" class="admin-btn-primary">Add Testimonial</button>
+                </div>
+                <div id="test-list-admin"></div>
+            </div>
+
+            <!-- Tab: Services -->
+            <div id="tab-services" class="db-tab">
+                <div class="svc-cat-buttons" id="svc-cat-buttons"></div>
+                <div id="svc-items-panel" class="svc-items-panel" style="display:none;">
+                    <div class="admin-form-card" id="svc-add-form">
+                        <h3 id="svc-add-title">➕ Add Service</h3>
+                        <div class="admin-form-grid">
+                            <input type="text" id="svc-new-name"  class="admin-input" placeholder="Service name (e.g. Plumber)">
+                            <input type="text" id="svc-new-icon"  class="admin-input" placeholder="Emoji icon (e.g. 🔧)">
+                            <input type="text" id="svc-new-image" class="admin-input" placeholder="Image URL">
+                            <input type="text" id="svc-new-price" class="admin-input" placeholder="Starting price (e.g. Rs. 500)">
+                        </div>
+                        <button class="admin-btn-primary" onclick="addCatalogItem()">Add to Category</button>
+                    </div>
+                    <div id="svc-items-list"></div>
+                </div>
+            </div>
+
+            <!-- Tab: Cities & Villages -->
+            <div id="tab-location" class="db-tab">
+                <div class="admin-form-card">
+                    <h3>🏙️ Add New City</h3>
+                    <div class="admin-add-city-row">
+                        <input type="text" id="new-city-name"     class="admin-input" placeholder="City name (e.g. Gujranwala)">
+                        <input type="text" id="new-city-district" class="admin-input" placeholder="District (e.g. Gujranwala)">
+                        <button onclick="handleAddCity()" class="admin-btn-primary admin-btn-green">+ Add City</button>
+                    </div>
+                    <div id="city-add-msg" class="admin-msg"></div>
+                </div>
+                <div id="location-list-admin"></div>
+            </div>
+
+        </main>
+    </div><!-- end .admin-layout -->
+
+    <script src="../js/store.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

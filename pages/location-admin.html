@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Manager | PakServicesHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="admin-sidebar-logo">
+            <div class="logo-text">Pak<span>Services</span>Hub</div>
+            <div class="logo-sub">Location Manager</div>
+        </div>
+        <a href="dashboard.html" class="admin-sidebar-item admin-sidebar-link">⬅️ Back to Dashboard</a>
+        <a href="../index.html"  class="admin-sidebar-item admin-sidebar-link">🏠 View Website</a>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+        <h1 class="admin-page-title">📍 Cities &amp; Villages Manager</h1>
+
+        <!-- Stats -->
+        <div class="loc-stats-row">
+            <div class="loc-stat-card">
+                <div class="loc-stat-num" id="lm-stat-cities">0</div>
+                <div class="loc-stat-lbl">Cities</div>
+            </div>
+            <div class="loc-stat-card">
+                <div class="loc-stat-num" id="lm-stat-tehsils">0</div>
+                <div class="loc-stat-lbl">Tehsils</div>
+            </div>
+            <div class="loc-stat-card">
+                <div class="loc-stat-num" id="lm-stat-ucs">0</div>
+                <div class="loc-stat-lbl">Union Councils</div>
+            </div>
+            <div class="loc-stat-card">
+                <div class="loc-stat-num" id="lm-stat-villages">0</div>
+                <div class="loc-stat-lbl">Villages</div>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="loc-search-bar">
+            <span class="loc-search-icon">🔍</span>
+            <input type="text" id="lm-search-input" placeholder="Search cities, tehsils, villages…">
+            <button class="loc-search-clear" onclick="clearSearch()">✕</button>
+        </div>
+
+        <!-- Add City -->
+        <div class="loc-add-panel">
+            <h3>🏙️ Add New City</h3>
+            <div class="loc-add-row">
+                <input type="text" id="lm-city-name"     class="loc-input" placeholder="City name (e.g. Gujranwala)">
+                <input type="text" id="lm-city-district" class="loc-input" placeholder="District (e.g. Gujranwala)">
+                <button class="loc-btn-primary loc-btn-success" onclick="addCity()">+ Add City</button>
+            </div>
+            <div id="lm-city-msg" class="admin-msg"></div>
+        </div>
+
+        <!-- City List -->
+        <div id="lm-cities-container"></div>
+    </main>
+
+    <!-- Confirmation Modal -->
+    <div class="lm-modal-overlay" id="lm-modal-overlay">
+        <div class="lm-modal">
+            <div class="lm-modal-icon">⚠️</div>
+            <h3 id="lm-modal-title">Confirm Delete</h3>
+            <p id="lm-modal-body">Are you sure?</p>
+            <div class="lm-modal-btns">
+                <button class="lm-modal-cancel"  onclick="LocationAdmin.closeModal()">Cancel</button>
+                <button class="lm-modal-confirm" onclick="LocationAdmin.executeConfirm()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/location-admin.js"></script>
+</body>
+</html>

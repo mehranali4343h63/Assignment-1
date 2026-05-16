@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | PakServicesHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <header class="standard-header">
+        <h1>Join PakServicesHub</h1>
+        <p>Create your free customer account</p>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card auth-card-wide">
+
+            <h2 class="auth-card-title">Create Account</h2>
+            <p class="auth-card-subtitle">Sign up to book services and track your orders</p>
+
+            <div class="auth-error" id="signup-error"></div>
+            <div class="auth-success" id="signup-success"></div>
+
+            <form id="signup-form" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="su-name" placeholder="Muhammad Ali" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="su-email" placeholder="ali@example.pk" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="su-phone" placeholder="03XX-XXXXXXX" required>
+                </div>
+                <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" id="su-password" placeholder="Min 6 chars, 1 upper, 1 number, 1 special" required>
+                    <div class="pw-strength-wrap" id="pw-strength"></div>
+                    <div class="pw-criteria">
+                        <span>Password must have:</span>
+                        <span id="c-len"  class="c-item">✗ 6+ characters</span>
+                        <span id="c-up"   class="c-item">✗ 1 uppercase</span>
+                        <span id="c-low"  class="c-item">✗ 1 lowercase</span>
+                        <span id="c-num"  class="c-item">✗ 1 number</span>
+                        <span id="c-spec" class="c-item">✗ 1 special char</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password *</label>
+                    <input type="password" id="su-confirm" placeholder="Repeat password" required>
+                </div>
+
+                <button type="submit" class="btn-login-submit" id="su-btn">
+                    <span id="su-btn-label">Create Free Account →</span>
+                </button>
+            </form>
+
+            <p class="auth-switch-text">
+                Already have an account? <a href="login.html" class="auth-switch-link">Login Here</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/signup.js"></script>
+</body>
+</html>

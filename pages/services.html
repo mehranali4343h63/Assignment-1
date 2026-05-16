@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Professionals | PakServicesHub Pasrur</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <header class="hero-pakservices" style="padding: 100px 5%;">
+        <div class="animate-up">
+            <h1>Pasrur's Elite <br> <span style="color: var(--primary-light)">Professionals</span></h1>
+            <p>Direct access to verified experts. Browse by category or search below.</p>
+        </div>
+    </header>
+
+    <div style="padding: 3rem 5%; background: white; border-bottom: 1px solid #f1f5f9; position: sticky; top: 120px; z-index: 100; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+        <button class="btn btn-primary-gradient" style="border-radius: 50px;" onclick="renderServices('All')">All Experts</button>
+        <button class="btn btn-ghost" style="border-radius: 50px; border: 1px solid #e2e8f0;" onclick="renderServices('Repair')">Appliance Repair</button>
+        <button class="btn btn-ghost" style="border-radius: 50px; border: 1px solid #e2e8f0;" onclick="renderServices('Cleaning')">Cleaning</button>
+        <button class="btn btn-ghost" style="border-radius: 50px; border: 1px solid #e2e8f0;" onclick="renderServices('Education')">Education</button>
+        <button class="btn btn-ghost" style="border-radius: 50px; border: 1px solid #e2e8f0;" onclick="renderServices('Construction')">Construction</button>
+        <button class="btn btn-ghost" style="border-radius: 50px; border: 1px solid #e2e8f0;" onclick="renderServices('Plumbing')">Plumbing</button>
+    </div>
+
+    <div class="elite-grid" id="services-grid" style="padding-top: 6rem; padding-bottom: 10rem;">
+        <!-- Filled by JS -->
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/store.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        function renderServices(filter = 'All') {
+            const container = document.getElementById('services-grid');
+            container.innerHTML = '';
+            const services = store.getServices();
+            const filtered = filter === 'All' ? services : services.filter(s => s.category === filter);
+
+            filtered.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'elite-card animate-up';
+                card.onclick = () => store.initiateBooking(service.id);
+                card.innerHTML = `
+                    <div class="elite-icon">🛠️</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--primary);">${service.title}</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">${service.category} Specialist</p>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; font-weight: 800;">
+                        <span style="color: #fbbf24; font-size: 1.2rem;">★</span>
+                        <span>${service.rating}</span>
+                        <span style="color: #cbd5e1; font-weight: 400;">|</span>
+                        <span style="color: var(--text-muted); font-size: 0.9rem; font-weight: 500;">${service.reviews} Bookings</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            App.mapEliteIcons(); // Re-map icons for newly rendered cards
+            App.handleScrollAnimations(); 
+        }
+        document.addEventListener('DOMContentLoaded', () => renderServices());
+    </script>
+</body>
+</html>
