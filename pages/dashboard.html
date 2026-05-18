@@ -75,10 +75,12 @@
                 <div class="admin-form-card">
                     <h3>➕ Add New Business</h3>
                     <div class="admin-form-grid">
-                        <input type="text" id="biz-name"  class="admin-input" placeholder="Business Name">
-                        <input type="text" id="biz-loc"   class="admin-input" placeholder="Location (e.g. Pasrur City)">
+                        <input type="text" id="biz-name"  class="admin-input" placeholder="Business Name *">
+                        <input type="text" id="biz-loc"   class="admin-input" placeholder="Location (e.g. Pasrur City) *">
                         <input type="text" id="biz-image" class="admin-input" placeholder="Image URL (optional)">
-                        <input type="text" id="biz-cat"   class="admin-input" placeholder="Category (e.g. Auto Services)">
+                        <input type="text" id="biz-cat"   class="admin-input" placeholder="Category (e.g. Food & Restaurants)">
+                        <input type="text" id="biz-map"   class="admin-input" placeholder="📍 Google Maps Link (optional)">
+                        <input type="text" id="biz-video" class="admin-input" placeholder="▶ YouTube / TikTok / Reel Link (optional)">
                     </div>
                     <button onclick="handleAddBiz()" class="admin-btn-primary">Add Business</button>
                 </div>
@@ -88,14 +90,23 @@
             <!-- Tab: Testimonials -->
             <div id="tab-test" class="db-tab">
                 <div class="admin-form-card">
-                    <h3>➕ Add Video Testimonial</h3>
+                    <h3>🎬 Add Customer Testimonial</h3>
+                    <p style="color:#64748b; font-size:0.88rem; margin-bottom:1.2rem;">Add a video feedback from a customer. The video will appear on the home page with a play button.</p>
                     <div class="admin-form-grid">
-                        <input type="text" id="test-name" class="admin-input" placeholder="User Name">
-                        <input type="text" id="test-link" class="admin-input" placeholder="YouTube Embed URL">
-                        <input type="text" id="test-biz"  class="admin-input" placeholder="User Location / Business">
+                        <input type="text" id="test-name"    class="admin-input" placeholder="Customer Name *">
+                        <input type="text" id="test-biz"     class="admin-input" placeholder="Location (e.g. Pasrur City)">
+                        <input type="text" id="test-link"    class="admin-input" placeholder="▶ YouTube / TikTok Video Link *">
+                        <input type="text" id="test-service" class="admin-input" placeholder="Service Used (e.g. Plumber)">
+                        <select id="test-rating" class="admin-input">
+                            <option value="5">⭐⭐⭐⭐⭐ 5 Stars</option>
+                            <option value="4">⭐⭐⭐⭐ 4 Stars</option>
+                            <option value="3">⭐⭐⭐ 3 Stars</option>
+                            <option value="2">⭐⭐ 2 Stars</option>
+                            <option value="1">⭐ 1 Star</option>
+                        </select>
                     </div>
-                    <textarea id="test-text" class="admin-textarea" placeholder="Feedback text…"></textarea>
-                    <button onclick="handleAddTest()" class="admin-btn-primary">Add Testimonial</button>
+                    <textarea id="test-text" class="admin-textarea" placeholder="Customer feedback / review text (optional)…"></textarea>
+                    <button onclick="handleAddTest()" class="admin-btn-primary">➕ Add Testimonial</button>
                 </div>
                 <div id="test-list-admin"></div>
             </div>

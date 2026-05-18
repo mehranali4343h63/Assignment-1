@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ | Pasrur Skill Worker</title>
+    <title>FAQ | PakServicesHub</title>
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
@@ -12,28 +12,82 @@
 
     <header class="standard-header">
         <h1>Help Center</h1>
-        <p>Frequently asked questions about our elite service platform</p>
+        <p>Frequently asked questions about PakServicesHub</p>
     </header>
 
-    <div class="faq-container animate-up">
+    <div class="faq-container">
+
         <div class="faq-item">
-            <div class="faq-question">How do I book a premium service? <span>+</span></div>
-            <div class="faq-answer">Simply browse our experts, select a profile, and click "Book Now". Note that you must be logged in to confirm an appointment.</div>
+            <div class="faq-question" onclick="toggleFaq(this)">How do I book a service? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">Browse our services, select the one you need, and click "Book Now". You must be logged in as a customer to confirm a booking. If you don't have an account, sign up for free — it takes less than a minute.</div>
         </div>
+
         <div class="faq-item">
-            <div class="faq-question">Are the professionals background checked? <span>+</span></div>
-            <div class="faq-answer">Every worker on Pasrur Skill Worker undergoes a rigorous identity and skill verification process.</div>
+            <div class="faq-question" onclick="toggleFaq(this)">Are the professionals verified? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">Yes. Every worker listed on PakServicesHub goes through an identity and skill verification process before being listed. Verified profiles are marked with a 🛡️ badge.</div>
         </div>
+
         <div class="faq-item">
-            <div class="faq-question">What if I'm not satisfied? <span>+</span></div>
-            <div class="faq-answer">We prioritize quality. If you're unhappy, please contact support immediately for resolution.</div>
+            <div class="faq-question" onclick="toggleFaq(this)">What if I'm not satisfied with the service? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">We prioritize quality. If you're unhappy with a service, contact our support team at mehranali4343h63@gmail.com or call 0336-4254957 and we will resolve the issue promptly.</div>
         </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">Is PakServicesHub free to use? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">Yes, browsing and booking services is completely free for customers. Service providers may have listing fees — contact us for details.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">Which areas do you cover? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">We currently cover Pasrur, Sialkot, Narowal and surrounding villages. We are expanding rapidly — if your area isn't listed, contact us and we'll add it.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">How do I add my business to PakServicesHub? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">Contact us via the Contact page or call 0336-4254957. Our admin team will review your business and add it to the platform within 24 hours.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">Can I cancel a booking? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">Yes. You can cancel a booking from your customer dashboard under "My Bookings". Please cancel at least 2 hours before the scheduled time to avoid any inconvenience to the service provider.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">How do I pay for services? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">Currently payments are made directly to the service provider in cash after the service is completed. Online payment options are coming soon.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">How do I contact support? <span class="faq-icon">+</span></div>
+            <div class="faq-answer">You can reach us via the Contact page, email us at mehranali4343h63@gmail.com, or call/WhatsApp us at 0336-4254957. We're available 9am–9pm daily.</div>
+        </div>
+
     </div>
 
     <div id="footer-placeholder"></div>
 
     <script src="../js/store.js"></script>
+    <script src="../js/cart.js"></script>
     <script src="../js/components.js"></script>
-    <script src="../js/app.js"></script>
+    <script>
+        function toggleFaq(el) {
+            const item   = el.parentElement;
+            const answer = item.querySelector('.faq-answer');
+            const icon   = el.querySelector('.faq-icon');
+            const isOpen = item.classList.contains('open');
+
+            document.querySelectorAll('.faq-item.open').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.faq-answer').style.maxHeight = null;
+                i.querySelector('.faq-icon').textContent = '+';
+            });
+
+            if (!isOpen) {
+                item.classList.add('open');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.textContent = '−';
+            }
+        }
+    </script>
 </body>
 </html>

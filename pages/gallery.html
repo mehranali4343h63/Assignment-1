@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work Gallery | Pasrur Skill Worker</title>
+    <title>Gallery | PakServicesHub</title>
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
@@ -11,41 +11,86 @@
     <div id="navbar-placeholder"></div>
 
     <header class="standard-header">
-        <h1>Our Work Excellence</h1>
-        <p>A premium showcase of professional services delivered in Pasrur</p>
+        <h1>Service Gallery</h1>
+        <p>A showcase of professional services delivered across Pasrur, Sialkot &amp; Narowal</p>
     </header>
 
-    <div class="gallery-grid">
+    <div class="gallery-grid" id="gallery-grid">
+        <!-- Static fallback items -->
         <div class="gallery-item animate-up">
             <img src="../sources/plumber.jpg" alt="Plumbing Work">
-            <div class="gallery-overlay"><h3>Bathroom Renovation</h3><p>Complete pipe replacement and modern fixture installation.</p></div>
+            <div class="gallery-overlay"><h3>Plumbing Services</h3><p>Expert pipe repair and installation.</p></div>
         </div>
         <div class="gallery-item animate-up">
             <img src="../sources/electrician.jpg" alt="Electrical Work">
-            <div class="gallery-overlay"><h3>Smart Home Setup</h3><p>Full commercial wiring and smart lightning integration.</p></div>
+            <div class="gallery-overlay"><h3>Electrical Services</h3><p>Safe wiring and smart home setup.</p></div>
         </div>
         <div class="gallery-item animate-up">
             <img src="../sources/mason.jpg" alt="Masonry">
-            <div class="gallery-overlay"><h3>Exterior Brickwork</h3><p>High-end villa foundation and decorative masonry.</p></div>
+            <div class="gallery-overlay"><h3>Masonry &amp; Construction</h3><p>Quality brickwork and foundations.</p></div>
         </div>
         <div class="gallery-item animate-up">
             <img src="../sources/carpenter.jpg" alt="Carpentry">
-            <div class="gallery-overlay"><h3>Custom Kitchen</h3><p>Hand-crafted cabinets with premium teak finish.</p></div>
+            <div class="gallery-overlay"><h3>Carpentry</h3><p>Custom furniture and woodwork.</p></div>
         </div>
         <div class="gallery-item animate-up">
             <img src="../sources/cleaner.jpg" alt="Cleaning">
-            <div class="gallery-overlay"><h3>Deep Office Cleaning</h3><p>Hospital-grade sanitation for corporate spaces.</p></div>
+            <div class="gallery-overlay"><h3>Home Cleaning</h3><p>Deep cleaning for homes and offices.</p></div>
         </div>
         <div class="gallery-item animate-up">
             <img src="../sources/mechanic.jpg" alt="Auto Repair">
-            <div class="gallery-overlay"><h3>Engine Overhaul</h3><p>Complete engine maintenance for premium sedans.</p></div>
+            <div class="gallery-overlay"><h3>Auto Services</h3><p>Engine repair and maintenance.</p></div>
+        </div>
+        <div class="gallery-item animate-up">
+            <img src="../sources/tutor.jpg" alt="Tuition">
+            <div class="gallery-overlay"><h3>Home Tuition</h3><p>Expert tutors for all grades.</p></div>
+        </div>
+        <div class="gallery-item animate-up">
+            <img src="../sources/maid.png" alt="Maid">
+            <div class="gallery-overlay"><h3>Domestic Workers</h3><p>Trusted maids and housekeepers.</p></div>
+        </div>
+        <div class="gallery-item animate-up">
+            <img src="../sources/makeup.png" alt="Beauty">
+            <div class="gallery-overlay"><h3>Beauty &amp; Salon</h3><p>Professional makeup and styling.</p></div>
         </div>
     </div>
 
     <div id="footer-placeholder"></div>
 
     <script src="../js/store.js"></script>
+    <script src="../js/cart.js"></script>
     <script src="../js/components.js"></script>
-    <script src="../js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add extra images from catalog (Unsplash ones)
+            const grid = document.getElementById('gallery-grid');
+            const catalog = store.getCatalog();
+            const seen = new Set();
+            catalog.forEach(cat => {
+                cat.items.forEach(item => {
+                    if (item.imageUrl && item.imageUrl.startsWith('https://') && !seen.has(item.imageUrl)) {
+                        seen.add(item.imageUrl);
+                        const div = document.createElement('div');
+                        div.className = 'gallery-item animate-up';
+                        div.innerHTML = `
+                            <img src="${item.imageUrl}" alt="${item.name}" loading="lazy"
+                                 onerror="this.parentElement.style.display='none'">
+                            <div class="gallery-overlay">
+                                <h3>${item.name}</h3>
+                                <p>${cat.label.replace(/^[^\w]+/, '')}</p>
+                            </div>`;
+                        grid.appendChild(div);
+                        if (seen.size >= 30) return; // cap at 30 extra
+                    }
+                });
+            });
+
+            // Scroll animation
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.05 });
+            document.querySelectorAll('.animate-up').forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>

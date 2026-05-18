@@ -230,16 +230,18 @@ function addCatalogItem() {
 // ════════════════════════════════════════════════════════════════
 
 function handleAddBiz() {
-    const name     = document.getElementById('biz-name').value.trim();
-    const loc      = document.getElementById('biz-loc').value.trim();
-    const image    = document.getElementById('biz-image').value.trim() || '../sources/logo.png';
-    const category = document.getElementById('biz-cat').value.trim() || 'General';
+    const name      = document.getElementById('biz-name').value.trim();
+    const loc       = document.getElementById('biz-loc').value.trim();
+    const image     = document.getElementById('biz-image').value.trim() || '../sources/logo.png';
+    const category  = document.getElementById('biz-cat').value.trim() || 'General';
+    const mapLink   = document.getElementById('biz-map').value.trim();
+    const videoLink = document.getElementById('biz-video').value.trim();
 
     if (!name) { alert('Please enter a business name.'); return; }
     if (!loc)  { alert('Please enter a location.'); return; }
 
-    store.addBusiness({ name, loc, image, category, status: 'OPEN', rating: 5 });
-    ['biz-name', 'biz-loc', 'biz-image', 'biz-cat'].forEach(id => {
+    store.addBusiness({ name, loc, image, category, mapLink, videoLink, status: 'OPEN', rating: 5 });
+    ['biz-name', 'biz-loc', 'biz-image', 'biz-cat', 'biz-map', 'biz-video'].forEach(id => {
         document.getElementById(id).value = '';
     });
     renderBizAdmin();
@@ -253,24 +255,29 @@ function renderBizAdmin() {
     c.innerHTML = '<h3 class="admin-list-header">Current Businesses (' + list.length + ')</h3>';
 
     if (!list.length) {
-        c.innerHTML += '<p style="color:#64748b; padding:1rem 0;">No businesses added yet.</p>';
+        c.innerHTML += '<p class="admin-empty-msg">No businesses added yet.</p>';
         return;
     }
 
     list.forEach(b => {
         const row = document.createElement('div');
-        row.className = 'admin-list-row';
+        row.className = 'admin-list-row admin-biz-row';
         row.innerHTML = `
-            <div class="admin-list-row-info">
-                <img src="${b.image}" alt="${b.name}" class="admin-biz-thumb"
+            <div class="admin-biz-thumb-wrap">
+                <img src="${b.image || '../sources/logo.png'}" alt="${b.name}" class="admin-biz-thumb"
                      onerror="this.src='../sources/logo.png'">
-                <div>
-                    <strong>${b.name}</strong>
-                    <span class="admin-list-sub"> — ${b.loc}</span>
-                    <span class="admin-badge-cat">${b.category || '—'}</span>
+            </div>
+            <div class="admin-list-row-info">
+                <strong>${b.name}</strong>
+                <span class="admin-list-sub"> — ${b.loc}</span>
+                <span class="admin-badge-cat">${b.category || '—'}</span>
+                <div class="admin-biz-links">
+                    ${b.mapLink   ? `<a href="${b.mapLink}"   target="_blank" class="admin-biz-link-btn admin-biz-map-btn">📍 Map</a>` : ''}
+                    ${b.videoLink ? `<a href="${b.videoLink}" target="_blank" class="admin-biz-link-btn admin-biz-vid-btn">▶ Video</a>` : ''}
                 </div>
             </div>
             <div class="admin-list-actions">
+                <button class="btn-edit-sm" onclick="openEditBiz(${b.id})">✏️ Edit</button>
                 <button class="btn-danger-sm" onclick="deleteBiz(${b.id})">🗑️ Delete</button>
             </div>
         `;
@@ -287,22 +294,142 @@ function deleteBiz(id) {
 }
 
 // ════════════════════════════════════════════════════════════════
+// EDIT BUSINESS MODAL
+// ════════════════════════════════════════════════════════════════
+
+function openEditBiz(id) {
+    const b = store.getBusinesses().find(x => x.id === id);
+    if (!b) return;
+
+    const existing = document.getElementById('edit-biz-modal');
+    if (existing) existing.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'edit-biz-modal';
+    overlay.className = 'edit-biz-overlay';
+    overlay.innerHTML = `
+        <div class="edit-biz-card">
+            <div class="edit-biz-header">
+                <h3>✏️ Edit Business</h3>
+                <button class="edit-biz-close" onclick="closeEditBiz()">✕</button>
+            </div>
+            <div class="edit-biz-body">
+                <div class="admin-form-grid">
+                    <div class="edit-field-group">
+                        <label>Business Name *</label>
+                        <input type="text" id="edit-biz-name" class="admin-input" value="${escHtml(b.name)}">
+                    </div>
+                    <div class="edit-field-group">
+                        <label>Location *</label>
+                        <input type="text" id="edit-biz-loc" class="admin-input" value="${escHtml(b.loc)}">
+                    </div>
+                    <div class="edit-field-group">
+                        <label>Category</label>
+                        <input type="text" id="edit-biz-cat" class="admin-input" value="${escHtml(b.category || '')}">
+                    </div>
+                    <div class="edit-field-group">
+                        <label>Status</label>
+                        <select id="edit-biz-status" class="admin-input">
+                            <option value="OPEN"   ${(b.status||'OPEN')==='OPEN'   ? 'selected':''}>OPEN</option>
+                            <option value="CLOSED" ${(b.status||'')==='CLOSED' ? 'selected':''}>CLOSED</option>
+                            <option value="BUSY"   ${(b.status||'')==='BUSY'   ? 'selected':''}>BUSY</option>
+                        </select>
+                    </div>
+                    <div class="edit-field-group edit-field-full">
+                        <label>🖼️ Image URL</label>
+                        <input type="text" id="edit-biz-image" class="admin-input"
+                               value="${escHtml(b.image || '')}"
+                               placeholder="https://... or leave blank for default"
+                               oninput="previewEditImg(this.value)">
+                        <div class="edit-img-preview-wrap">
+                            <img id="edit-img-preview" src="${escHtml(b.image || '../sources/logo.png')}"
+                                 alt="preview" onerror="this.src='../sources/logo.png'">
+                        </div>
+                    </div>
+                    <div class="edit-field-group edit-field-full">
+                        <label>📍 Google Maps Link</label>
+                        <input type="text" id="edit-biz-map" class="admin-input"
+                               value="${escHtml(b.mapLink || '')}"
+                               placeholder="https://maps.google.com/...">
+                    </div>
+                    <div class="edit-field-group edit-field-full">
+                        <label>▶ YouTube / TikTok / Reel Link</label>
+                        <input type="text" id="edit-biz-video" class="admin-input"
+                               value="${escHtml(b.videoLink || '')}"
+                               placeholder="https://youtube.com/watch?v=...">
+                    </div>
+                </div>
+            </div>
+            <div class="edit-biz-footer">
+                <button class="admin-btn-secondary" onclick="closeEditBiz()">Cancel</button>
+                <button class="admin-btn-primary" onclick="saveEditBiz(${id})">💾 Save Changes</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+    setTimeout(() => overlay.classList.add('open'), 10);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeEditBiz(); });
+}
+
+function previewEditImg(url) {
+    const img = document.getElementById('edit-img-preview');
+    if (img) img.src = url || '../sources/logo.png';
+}
+
+function saveEditBiz(id) {
+    const name      = document.getElementById('edit-biz-name').value.trim();
+    const loc       = document.getElementById('edit-biz-loc').value.trim();
+    const cat       = document.getElementById('edit-biz-cat').value.trim();
+    const status    = document.getElementById('edit-biz-status').value;
+    const image     = document.getElementById('edit-biz-image').value.trim() || '../sources/logo.png';
+    const mapLink   = document.getElementById('edit-biz-map').value.trim();
+    const videoLink = document.getElementById('edit-biz-video').value.trim();
+
+    if (!name) { alert('Business name is required.'); return; }
+    if (!loc)  { alert('Location is required.'); return; }
+
+    store.updateBusiness(id, { name, loc, category: cat, status, image, mapLink, videoLink });
+    closeEditBiz();
+    renderBizAdmin();
+    showDashToast('"' + name + '" updated!', 'success');
+}
+
+function closeEditBiz() {
+    const modal = document.getElementById('edit-biz-modal');
+    if (modal) {
+        modal.classList.remove('open');
+        setTimeout(() => modal.remove(), 300);
+    }
+}
+
+function escHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+// ════════════════════════════════════════════════════════════════
 // TESTIMONIALS
 // ════════════════════════════════════════════════════════════════
 
 function handleAddTest() {
-    const name  = document.getElementById('test-name').value.trim();
-    const video = document.getElementById('test-link').value.trim();
-    const text  = document.getElementById('test-text').value.trim();
-    const biz   = document.getElementById('test-biz').value.trim();
+    const name    = document.getElementById('test-name').value.trim();
+    const video   = document.getElementById('test-link').value.trim();
+    const text    = document.getElementById('test-text').value.trim();
+    const biz     = document.getElementById('test-biz').value.trim();
+    const rating  = document.getElementById('test-rating').value || '5';
+    const service = document.getElementById('test-service').value.trim();
 
-    if (!name)  { alert('Please enter a user name.'); return; }
+    if (!name)  { alert('Please enter a customer name.'); return; }
     if (!video) { alert('Please enter a video link.'); return; }
 
-    store.addTestimonial({ name, video, text, biz, thumb: '../sources/logo.png' });
-    ['test-name', 'test-link', 'test-biz', 'test-text'].forEach(id => {
+    store.addTestimonial({ name, video, text, biz, rating, service, thumb: '../sources/logo.png' });
+    ['test-name', 'test-link', 'test-biz', 'test-text', 'test-service'].forEach(id => {
         document.getElementById(id).value = '';
     });
+    document.getElementById('test-rating').value = '5';
     renderTestAdmin();
     showDashToast('"' + name + '" testimonial added!', 'success');
 }
@@ -314,17 +441,24 @@ function renderTestAdmin() {
     c.innerHTML = '<h3 class="admin-list-header">Current Testimonials (' + list.length + ')</h3>';
 
     if (!list.length) {
-        c.innerHTML += '<p style="color:#64748b; padding:1rem 0;">No testimonials added yet.</p>';
+        c.innerHTML += '<p style="color:#64748b; padding:1rem 0;">No testimonials added yet. Add your first customer feedback above.</p>';
         return;
     }
 
     list.forEach(t => {
+        const rating = parseInt(t.rating) || 5;
+        const stars  = '★'.repeat(rating) + '☆'.repeat(5 - rating);
         const row = document.createElement('div');
         row.className = 'admin-list-row';
+        row.style.flexWrap = 'wrap';
         row.innerHTML = `
-            <div class="admin-list-row-info">
+            <div class="admin-list-row-info" style="flex:1; min-width:200px;">
                 <strong>${t.name}</strong>
                 <span class="admin-list-sub"> — ${t.biz || 'N/A'}</span>
+                ${t.service ? `<span class="admin-badge-cat">${t.service}</span>` : ''}
+                <div style="color:#f59e0b; font-size:0.9rem; margin-top:3px;">${stars}</div>
+                ${t.text ? `<div style="color:#64748b; font-size:0.82rem; margin-top:3px; font-style:italic;">"${t.text.substring(0,60)}${t.text.length>60?'…':''}"</div>` : ''}
+                ${t.video ? `<a href="${t.video}" target="_blank" style="color:#2563eb; font-size:0.8rem; font-weight:600;">▶ View Video</a>` : ''}
             </div>
             <button class="btn-danger-sm" onclick="deleteTest(${t.id})">🗑️ Delete</button>
         `;

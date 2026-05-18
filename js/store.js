@@ -286,10 +286,8 @@ const INITIAL_CATALOG = [
 ];
 
 const INITIAL_BUSINESSES = [
-    { id: 1, name: 'Crystal Aluminium',   loc: 'Gujranwala',  cityId: null,      ucId: null,         status: 'OPEN', verified: true, rating: 4, category: 'Other Service',  image: '../sources/logo.png'         },
-    { id: 2, name: 'Bike Mechanic',       loc: 'G.T. Road',   cityId: null,      ucId: null,         status: 'OPEN', verified: true, rating: 4, category: 'Auto Services',   image: '../sources/logo.png'         },
-    { id: 3, name: 'Malik Cement Agency', loc: 'Pasrur City', cityId: 'pasrur', ucId: 'uc-pasrur-city', status: 'OPEN', verified: true, rating: 5, category: 'Real Estate',    image: '../sources/mason.jpg'        },
-    { id: 4, name: 'DJ Jazi Sound',       loc: 'Haibat Pur',  cityId: 'pasrur', ucId: 'uc-chawinda',   status: 'OPEN', verified: true, rating: 5, category: 'Entertainment', image: '../sources/electrician.jpg' }
+    { id: 3, name: 'Malik Cement Agency', loc: 'Pasrur City', cityId: 'pasrur', ucId: 'uc-pasrur-city', status: 'OPEN', verified: true, rating: 5, category: 'Real Estate',    image: 'sources/mason.jpg',       mapLink: '', videoLink: '' },
+    { id: 4, name: 'DJ Jazi Sound',       loc: 'Haibat Pur',  cityId: 'pasrur', ucId: 'uc-chawinda',   status: 'OPEN', verified: true, rating: 5, category: 'Entertainment', image: 'sources/electrician.jpg', mapLink: '', videoLink: '' }
 ];
 
 const INITIAL_TESTIMONIALS = [
@@ -417,13 +415,15 @@ const store = {
     },
 
     // ── SERVICE CATALOG (grouped categories) ──────────────────────
-    // v3 = all mega menu items added
+    // v4 = stable — no more forced wipes
     getCatalog() {
-        // Force refresh if old version cached
         const ver = localStorage.getItem('psh_catalog_ver');
-        if (ver !== '3') {
-            localStorage.removeItem('psh_catalog_v1');
-            localStorage.setItem('psh_catalog_ver', '3');
+        if (ver !== '4') {
+            // Only wipe if coming from v1 or v2 (very old), keep v3 data intact
+            if (!ver || ver === '1' || ver === '2') {
+                localStorage.removeItem('psh_catalog_v1');
+            }
+            localStorage.setItem('psh_catalog_ver', '4');
         }
         return this._load('psh_catalog_v1', INITIAL_CATALOG);
     },
@@ -463,7 +463,12 @@ const store = {
     // ── SERVICES & BUSINESSES ─────────────────────────────────────
     getServices() { return this._load('psh_services', INITIAL_SERVICES); },
 
-    getBusinesses(filter = {}) { 
+    getBusinesses(filter = {}) {
+        // v2: clear old cached businesses that had wrong image paths
+        if (localStorage.getItem('psh_biz_ver') !== '2') {
+            localStorage.removeItem('psh_businesses');
+            localStorage.setItem('psh_biz_ver', '2');
+        }
         let list = this._load('psh_businesses', INITIAL_BUSINESSES); 
         if (filter.cityId) list = list.filter(b => b.cityId === filter.cityId);
         if (filter.category) list = list.filter(b => b.category === filter.category);
@@ -482,6 +487,15 @@ const store = {
     deleteBusiness(id) {
         const filtered = this.getBusinesses().filter(b => b.id !== id);
         this._save('psh_businesses', filtered);
+    },
+
+    updateBusiness(id, updates) {
+        const list = this.getBusinesses();
+        const idx  = list.findIndex(b => b.id === id);
+        if (idx === -1) return false;
+        list[idx] = Object.assign(list[idx], updates);
+        this._save('psh_businesses', list);
+        return true;
     },
 
     // ── TESTIMONIALS ────────────────────────────────────────────
