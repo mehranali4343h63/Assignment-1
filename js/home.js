@@ -492,11 +492,21 @@ function initBusinesses() {
     });
 }
 
-// Smart video handler — YouTube opens in modal, TikTok/Reel opens in new tab
+// Smart video handler — ALL videos open in modal on same page
 function handleBizVideo(embedUrl, name, originalUrl) {
     if (!originalUrl) return;
-    if (originalUrl.includes('tiktok.com') || originalUrl.includes('instagram.com') || originalUrl.includes('facebook.com')) {
-        window.open(originalUrl, '_blank');
+
+    // TikTok — convert to embed URL for iframe
+    if (originalUrl.includes('tiktok.com')) {
+        // Extract TikTok video ID and use embed
+        const match = originalUrl.match(/video\/(\d+)/);
+        if (match) {
+            const tiktokEmbed = 'https://www.tiktok.com/embed/v2/' + match[1];
+            openBizVideo(tiktokEmbed, name);
+        } else {
+            // Fallback: open in modal with direct link message
+            openBizVideo(originalUrl, name);
+        }
     } else {
         openBizVideo(embedUrl, name);
     }

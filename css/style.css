@@ -4310,3 +4310,167 @@ body.dark-mode .test-empty-state h3 { color: #e2e8f0; }
     border: none;
     display: block;
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   ABOUT PAGE — Inline CSS moved to stylesheet
+   ══════════════════════════════════════════════════════════════ */
+
+.about-section-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #1a2b4b;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Values section */
+.about-values-section {
+    background: #f8fafc;
+    padding: 4rem 5%;
+}
+.about-values-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.about-values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+.about-value-card {
+    background: white;
+    border-radius: 14px;
+    padding: 1.8rem;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.about-value-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+}
+.about-value-title {
+    color: #1a2b4b;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.about-value-text {
+    color: #64748b;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+/* How it works */
+.about-hiw-section {
+    padding: 4rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.about-hiw-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+.about-hiw-step { display: flex; flex-direction: column; align-items: center; }
+.about-hiw-icon {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+}
+.about-hiw-icon-blue  { background: #eff6ff; }
+.about-hiw-icon-green { background: #f0fdf4; }
+.about-hiw-icon-yellow{ background: #fef3c7; }
+.about-hiw-icon-pink  { background: #fdf2f8; }
+.about-hiw-title {
+    color: #1a2b4b;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+}
+.about-hiw-text { color: #64748b; font-size: 0.88rem; }
+
+/* CTA section */
+.about-cta-section {
+    background: linear-gradient(135deg, #1a2b4b, #2563eb);
+    padding: 3rem 5%;
+    text-align: center;
+    color: white;
+}
+.about-cta-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 0.8rem;
+    color: white;
+}
+.about-cta-sub {
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+.about-cta-btn {
+    background: white;
+    color: #1a2b4b;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 1rem;
+    display: inline-block;
+    transition: 0.2s;
+}
+.about-cta-btn:hover { background: #eff6ff; transform: translateY(-2px); }
+
+/* ══════════════════════════════════════════════════════════════
+   CONTACT PAGE — Inline CSS moved to stylesheet
+   ══════════════════════════════════════════════════════════════ */
+
+.contact-form-title {
+    color: #1a2b4b;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+.form-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    color: #1a2b4b;
+    background: white;
+    transition: 0.2s;
+}
+.form-select:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+.form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+    transition: 0.2s;
+}
+.form-textarea:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+.contact-success-btn { margin-top: 1.2rem; }
+
+/* Dark mode for new classes */
+body.dark-mode .about-value-card { background: #1e293b; border-color: #334155; }
+body.dark-mode .about-value-title { color: #e2e8f0; }
+body.dark-mode .about-value-text { color: #94a3b8; }
+body.dark-mode .about-hiw-title { color: #e2e8f0; }
+body.dark-mode .about-hiw-text { color: #94a3b8; }
+body.dark-mode .about-values-section { background: #0f172a; }
+body.dark-mode .form-select,
+body.dark-mode .form-textarea { background: #0f172a; border-color: #334155; color: #e2e8f0; }

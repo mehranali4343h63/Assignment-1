@@ -16,46 +16,34 @@
     </header>
 
     <div class="contact-grid">
-
-        <!-- Left: Contact Info -->
         <div>
             <h2 class="contact-heading">Get in Touch</h2>
             <p class="contact-sub">Have a question, complaint, or want to list your business? We respond within 24 hours.</p>
-
             <div class="contact-info-item">
                 <h4 class="contact-info-label">📍 Our Location</h4>
                 <p>Main Bazaar, Pasrur, Sialkot, Punjab, Pakistan</p>
             </div>
-
             <div class="contact-info-item">
                 <h4 class="contact-info-label">📞 Phone / WhatsApp</h4>
                 <p>0336-4254957</p>
             </div>
-
             <div class="contact-info-item">
                 <h4 class="contact-info-label">✉️ Email</h4>
                 <p>mehranali4343h63@gmail.com</p>
             </div>
-
             <div class="contact-info-item">
                 <h4 class="contact-info-label">🕐 Working Hours</h4>
                 <p>Monday – Saturday: 9:00 AM – 9:00 PM</p>
             </div>
-
             <div class="contact-quick-btns">
-                <a href="https://wa.me/923364254957" target="_blank" class="contact-quick-btn contact-quick-btn-wa">
-                    💬 Chat on WhatsApp
-                </a>
-                <a href="mailto:mehranali4343h63@gmail.com" class="contact-quick-btn contact-quick-btn-email">
-                    ✉️ Send Email
-                </a>
+                <a href="https://wa.me/923364254957" target="_blank" class="contact-quick-btn contact-quick-btn-wa">💬 Chat on WhatsApp</a>
+                <a href="mailto:mehranali4343h63@gmail.com" class="contact-quick-btn contact-quick-btn-email">✉️ Send Email</a>
             </div>
         </div>
 
-        <!-- Right: Contact Form -->
         <div>
             <div class="contact-form-card">
-                <h3 style="color:#1a2b4b; font-size:1.1rem; font-weight:800; margin-bottom:1.5rem;">📩 Send Us a Message</h3>
+                <h3 class="contact-form-title">📩 Send Us a Message</h3>
                 <form id="contact-form" onsubmit="handleContact(event)">
                     <div class="form-group">
                         <label>Your Name *</label>
@@ -71,7 +59,7 @@
                     </div>
                     <div class="form-group">
                         <label>Subject</label>
-                        <select style="width:100%;padding:12px 16px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:0.95rem;outline:none;font-family:'Inter',sans-serif;color:#1a2b4b;background:white;">
+                        <select class="form-select">
                             <option value="">Select a topic…</option>
                             <option>Book a Service</option>
                             <option>List My Business</option>
@@ -82,13 +70,12 @@
                     </div>
                     <div class="form-group">
                         <label>Message *</label>
-                        <textarea rows="4" placeholder="Describe your query in detail…" required style="width:100%;padding:12px 16px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:0.95rem;outline:none;font-family:'Inter',sans-serif;resize:vertical;"></textarea>
+                        <textarea class="form-textarea" rows="4" placeholder="Describe your query in detail…" required></textarea>
                     </div>
                     <button type="submit" class="btn-login-submit">📨 Send Message</button>
                 </form>
             </div>
         </div>
-
     </div>
 
     <div id="footer-placeholder"></div>
@@ -108,7 +95,7 @@
                         <div class="contact-success-icon">✅</div>
                         <h3>Message Sent!</h3>
                         <p>Thank you! We will contact you at <strong>0336-4254957</strong> within 24 hours.</p>
-                        <button class="btn-login-submit" style="margin-top:1.2rem;" onclick="location.reload()">Send Another</button>
+                        <button class="btn-login-submit contact-success-btn" onclick="location.reload()">Send Another</button>
                     </div>`;
             }, 800);
         }
