@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script src="js/icons.js"></script>
     <div id="navbar-placeholder"></div>
 
     <!-- ── Hero ── -->
@@ -19,36 +20,36 @@
 
             <div class="search-box-pak" id="main-search-box">
                 <div class="search-field search-field-main">
-                    <span class="search-field-icon">🔍</span>
+                    <span class="search-field-icon icon-search"></span>
                     <input type="text" id="main-search"
                         placeholder="Search plumbers, tutors, mechanics…"
                         autocomplete="off" aria-label="Search services">
                     <div id="search-results" class="search-results-panel"></div>
                 </div>
                 <div class="search-field city-field">
-                    <span class="search-field-icon">🏙️</span>
+                    <span class="search-field-icon icon-city"></span>
                     <select id="city-select" aria-label="Select city">
                         <option value="">Select City</option>
                     </select>
                 </div>
                 <div class="search-field village-search-wrapper" id="village-search-wrapper">
-                    <span class="search-field-icon village-pin-icon">📍</span>
+                    <span class="search-field-icon village-pin-icon icon-location"></span>
                     <input type="text" id="village-search"
                         placeholder="First select a city"
                         autocomplete="off" disabled aria-label="Search village">
                     <div id="village-results" class="search-results-panel village-results-panel"></div>
                 </div>
-                <button class="btn-search-pak" id="hero-search-btn" aria-label="Search">🔍</button>
+                <button class="btn-search-pak icon-search-btn" id="hero-search-btn" aria-label="Search"></button>
             </div>
 
             <div class="popular-chips" id="service-chips-row">
                 <span class="popular-label">Popular:</span>
-                <span class="chip-pak" data-val="Plumber">🔧 Plumber</span>
-                <span class="chip-pak" data-val="Electrician">⚡ Electrician</span>
-                <span class="chip-pak" data-val="Tutor">🎓 Tutor</span>
-                <span class="chip-pak" data-val="Mechanic">🚗 Mechanic</span>
-                <span class="chip-pak" data-val="Cook">🍳 Cook</span>
-                <span class="chip-pak" data-val="Maid">🧹 Maid</span>
+                <span class="chip-pak" data-val="Plumber"><span class="chip-icon icon-wrench-inline"></span> Plumber</span>
+                <span class="chip-pak" data-val="Electrician"><span class="chip-icon icon-lightning-inline"></span> Electrician</span>
+                <span class="chip-pak" data-val="Tutor"><span class="chip-icon icon-graduation-inline"></span> Tutor</span>
+                <span class="chip-pak" data-val="Mechanic"><span class="chip-icon icon-car-inline"></span> Mechanic</span>
+                <span class="chip-pak" data-val="Cook"><span class="chip-icon icon-chef-inline"></span> Cook</span>
+                <span class="chip-pak" data-val="Maid"><span class="chip-icon icon-broom-inline"></span> Maid</span>
             </div>
 
             <div class="popular-villages" id="popular-villages-strip">
@@ -105,16 +106,16 @@
     <!-- ── App Section ── -->
     <section class="app-section">
         <div class="animate-up">
-            <span class="app-badge">📱 Now Available on Google Play</span>
+            <span class="app-badge"><span class="icon-mobile-inline"></span> Now Available on Google Play</span>
             <h2 class="app-heading">Find Local Services<br>Anytime, Anywhere</h2>
             <p class="app-desc">Download the PakServicesHub app and connect with verified professionals in your village.</p>
             <div class="app-play-btn">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" height="35" alt="Google Play">
             </div>
             <div class="app-check">
-                <span>✓ Free to Use</span>
-                <span>✓ Verified Providers</span>
-                <span>✓ 24/7 Access</span>
+                <span><span class="icon-check-inline"></span> Free to Use</span>
+                <span><span class="icon-check-inline"></span> Verified Providers</span>
+                <span><span class="icon-check-inline"></span> 24/7 Access</span>
             </div>
         </div>
     </section>

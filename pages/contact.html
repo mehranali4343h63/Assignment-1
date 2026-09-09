@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script src="../js/icons.js"></script>
     <div id="navbar-placeholder"></div>
 
     <header class="standard-header">
@@ -20,30 +21,30 @@
             <h2 class="contact-heading">Get in Touch</h2>
             <p class="contact-sub">Have a question, complaint, or want to list your business? We respond within 24 hours.</p>
             <div class="contact-info-item">
-                <h4 class="contact-info-label">📍 Our Location</h4>
+                <h4 class="contact-info-label"><span class="icon-location-inline"></span> Our Location</h4>
                 <p>Main Bazaar, Pasrur, Sialkot, Punjab, Pakistan</p>
             </div>
             <div class="contact-info-item">
-                <h4 class="contact-info-label">📞 Phone / WhatsApp</h4>
+                <h4 class="contact-info-label"><span class="icon-phone-inline"></span> Phone / WhatsApp</h4>
                 <p>0336-4254957</p>
             </div>
             <div class="contact-info-item">
-                <h4 class="contact-info-label">✉️ Email</h4>
+                <h4 class="contact-info-label"><span class="icon-mail-inline"></span> Email</h4>
                 <p>mehranali4343h63@gmail.com</p>
             </div>
             <div class="contact-info-item">
-                <h4 class="contact-info-label">🕐 Working Hours</h4>
+                <h4 class="contact-info-label"><span class="icon-clock-inline"></span> Working Hours</h4>
                 <p>Monday – Saturday: 9:00 AM – 9:00 PM</p>
             </div>
             <div class="contact-quick-btns">
-                <a href="https://wa.me/923364254957" target="_blank" class="contact-quick-btn contact-quick-btn-wa">💬 Chat on WhatsApp</a>
-                <a href="mailto:mehranali4343h63@gmail.com" class="contact-quick-btn contact-quick-btn-email">✉️ Send Email</a>
+                <a href="https://wa.me/923364254957" target="_blank" class="contact-quick-btn contact-quick-btn-wa"><span class="icon-message-inline"></span> Chat on WhatsApp</a>
+                <a href="mailto:mehranali4343h63@gmail.com" class="contact-quick-btn contact-quick-btn-email"><span class="icon-mail-inline"></span> Send Email</a>
             </div>
         </div>
 
         <div>
             <div class="contact-form-card">
-                <h3 class="contact-form-title">📩 Send Us a Message</h3>
+                <h3 class="contact-form-title"><span class="icon-send-inline"></span> Send Us a Message</h3>
                 <form id="contact-form" onsubmit="handleContact(event)">
                     <div class="form-group">
                         <label>Your Name *</label>
@@ -72,7 +73,7 @@
                         <label>Message *</label>
                         <textarea class="form-textarea" rows="4" placeholder="Describe your query in detail…" required></textarea>
                     </div>
-                    <button type="submit" class="btn-login-submit">📨 Send Message</button>
+                    <button type="submit" class="btn-login-submit"><span class="icon-send-inline"></span> Send Message</button>
                 </form>
             </div>
         </div>
@@ -92,7 +93,7 @@
             setTimeout(() => {
                 document.getElementById('contact-form').innerHTML = `
                     <div class="contact-success">
-                        <div class="contact-success-icon">✅</div>
+                        <div class="contact-success-icon icon-check-circle-large"></div>
                         <h3>Message Sent!</h3>
                         <p>Thank you! We will contact you at <strong>0336-4254957</strong> within 24 hours.</p>
                         <button class="btn-login-submit contact-success-btn" onclick="location.reload()">Send Another</button>
